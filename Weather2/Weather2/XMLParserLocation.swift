@@ -37,7 +37,6 @@ class XMLParserLocation: NSObject, NSXMLParserDelegate {
   
         if elementName == "Result"{
             weather1 = Weather()
-            print("city *** ---- ***")
         }
 
     }
@@ -46,11 +45,9 @@ class XMLParserLocation: NSObject, NSXMLParserDelegate {
         
         if element1 == "city" {
             weather1.city += string
-            print(weather1.city)
         }
         else if element1 == "woeid" {
             weather1.woeid += string
-            print(weather1.woeid)
         }
        
     }

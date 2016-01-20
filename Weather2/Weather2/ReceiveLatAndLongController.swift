@@ -8,14 +8,16 @@
 
 import UIKit
 
-class ReceiveLatAndLongController: UIViewController {
+class ReceiveLatAndLongController: UIViewController, UITextFieldDelegate{
    
     @IBOutlet weak var latitudeTextField: UITextField!
     @IBOutlet weak var longitudeTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        latitudeTextField.delegate = self
+        longitudeTextField.delegate = self
+        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

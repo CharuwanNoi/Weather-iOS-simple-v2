@@ -33,7 +33,6 @@ class XMLParser: NSObject, NSXMLParserDelegate {
         
         element = elementName
         
-//        print("asd------")
         
         if elementName == "item" {
             weather = Weather()

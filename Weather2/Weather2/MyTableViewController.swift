@@ -11,7 +11,7 @@ import CoreData
 
 class MyTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
-    var titleArr = [String]()
+    var titleArray = [String]()
     var idArray = [String]()
 
     var latitude = String()
@@ -30,7 +30,8 @@ class MyTableViewController: UIViewController, UITableViewDelegate, UITableViewD
         @IBAction func saveTitle(segue:UIStoryboardSegue){
 
             if segue.identifier == "cityName"{
-           
+                
+
                 let titleVC: ReceiveLatAndLongController = segue.sourceViewController as! ReceiveLatAndLongController
 
                 latitude = titleVC.latitudeTextField.text!
@@ -43,7 +44,7 @@ class MyTableViewController: UIViewController, UITableViewDelegate, UITableViewD
                     alert.addButtonWithTitle("OK")
                     alert.show()
                 }else if Double(latitude) < -90 || Double(latitude) > 90 || Double(latitude) < -180 || Double(latitude) > 180 {
-                
+
                     let alert = UIAlertView()
                     alert.message = "found no city"
                     alert.addButtonWithTitle("OK")
@@ -66,17 +67,18 @@ class MyTableViewController: UIViewController, UITableViewDelegate, UITableViewD
                     alert.message = "Not found city."
                     alert.addButtonWithTitle("OK")
                     alert.show()
-                    
+
                 }else {
-  
+
                     let parser = XMLParserLocation(Url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text=%22\(latitude),\(longitude)%22%20and%20gflags=%22R%22")
            
                     let weather: Weather = parser.weather1
                     id = weather.woeid
                     city = weather.city
-        
+                    
                     idArray.append(id)
-                    titleArr.append(city)
+                    titleArray.append(city)
+                    
 
                 }
             }
@@ -90,14 +92,14 @@ class MyTableViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return self.titleArr.count;
+            return self.titleArray.count;
 
         }
         
         func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
             
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.titleArr[indexPath.row]
+            cell.textLabel?.text = self.titleArray[indexPath.row]
             
             return cell
         }
